@@ -122,8 +122,8 @@ async function apiCall(endpoint, options = {}) {
         headers['Authorization'] = `Bearer ${token}`;
     }
 
-    try {
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+     try {
+        const response = await fetch(`https://hello1-krcb.onrender.com${endpoint}`, {
             ...options,
             headers
         });
