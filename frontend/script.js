@@ -122,23 +122,18 @@ async function apiCall(endpoint, options = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  try {
+ try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      ...options,
-      headers
+        ...options,
+        headers
     });
-
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'API request failed');
-    }
-
+    if (!response.ok) throw new Error(data.error || 'API request failed');
     return data;
-  } catch (error) {
+} catch (error) {
     console.error('API Error:', error);
     throw error;
-  }
+}
 }
 
 
