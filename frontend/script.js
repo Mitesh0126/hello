@@ -673,7 +673,7 @@ async function processPayment() {
             };
 
             // Submit order
-            const result = await apiCall('${API_BASE_URL}/api/orders', {
+            const result = await fetch(`${API_BASE_URL}/api/orders`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`
