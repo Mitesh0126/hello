@@ -1139,7 +1139,7 @@ async function loadProductCatalog() {
 
     try {
         // Pass only the relative endpoint
-        const data = await apiCall('/api/products');
+    const data = await apiCall(`${API_BASE_URL}/api/products`, {
         currentProducts = data.products || [];
         filteredProducts = [...currentProducts];
         displayProducts();
