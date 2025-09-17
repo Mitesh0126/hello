@@ -754,7 +754,8 @@ async function viewOrderTracking() {
     }
 
     try {
-       const orders = await apiCall(`${API_BASE_URL}/api/orders`);
+        // Use backticks for template literal interpolation
+        const orders = await apiCall(`${API_BASE_URL}/api/orders`);
 
         if (orders.length === 0) {
             document.getElementById('orderTrackingContent').innerHTML = `
@@ -817,6 +818,7 @@ async function viewOrderTracking() {
         showErrorMessage('Failed to load orders: ' + error.message);
     }
 }
+
 
 function getDeliveryTimeline(order) {
     const statuses = ['pending', 'processing', 'shipped', 'delivered'];
