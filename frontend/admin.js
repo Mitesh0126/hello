@@ -4,7 +4,7 @@ let orders = [];
 let currentAdminUser = null;
 let authToken = null;
 
-const API_BASE_URL = window.location.origin;
+const API_BASE_URL = "https://hello1-krcb.onrender.com";
 
 // API Helper function for admin
 async function adminApiCall(endpoint, options = {}) {
