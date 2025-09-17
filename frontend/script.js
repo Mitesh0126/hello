@@ -209,7 +209,7 @@ function toggleAuth() {
 
 async function loadPlants(category = 'all') {
     try {
-        const data = await apiCall(`/api/products?category=${category}`);
+        const data = await apiCall(`${API_BASE_URL}/api/products?category=${category}`);
         return data.products || [];
     } catch (error) {
         console.error('Error loading plants:', error);
@@ -671,7 +671,7 @@ async function processPayment() {
             };
 
             // Submit order
-            const result = await apiCall('/api/orders', {
+            const result = await apiCall('${API_BASE_URL}/api/orders', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`
@@ -752,7 +752,7 @@ async function viewOrderTracking() {
     }
 
     try {
-        const orders = await apiCall('/api/orders');
+        const orders = await apiCall('${API_BASE_URL}/api/orders');
 
         if (orders.length === 0) {
             document.getElementById('orderTrackingContent').innerHTML = `
@@ -1052,7 +1052,7 @@ async function submitConsultation() {
             message: formData.get('consultMessage') || document.getElementById('consultMessage').value
         };
 
-        await apiCall('/api/consultations', {
+        await apiCall('${API_BASE_URL}/api/consultations', {
             method: 'POST',
             body: JSON.stringify(consultationData)
         });
@@ -1134,7 +1134,7 @@ async function loadProductCatalog() {
     if (!productsGrid) return;
 
     try {
-        const data = await apiCall('/api/products');
+        const data = await apiCall('${API_BASE_URL}/api/products');
         currentProducts = data.products || [];
         filteredProducts = [...currentProducts];
         displayProducts();
@@ -1305,7 +1305,7 @@ async function filterProducts() {
     currentPage = 1;
 
     try {
-        const data = await apiCall(`/api/products?category=${categoryFilter}`);
+        const data = await apiCall(`${API_BASE_URL}/api/products?category=${categoryFilter}`);
         filteredProducts = data.products || [];
         displayProducts();
     } catch (error) {
@@ -1321,7 +1321,7 @@ async function searchProducts() {
     currentPage = 1;
 
     try {
-        const data = await apiCall(`/api/products?search=${encodeURIComponent(query)}`);
+        const data = await apiCall(`${API_BASE_URL}/api/products?search=${encodeURIComponent(query)}`);
         filteredProducts = data.products || [];
         displayProducts();
     } catch (error) {
