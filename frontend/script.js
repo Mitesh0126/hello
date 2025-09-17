@@ -754,8 +754,8 @@ async function viewOrderTracking() {
     }
 
     try {
-        // Use backticks for template literal interpolation
-        const orders = await apiCall(`${API_BASE_URL}/api/orders`);
+        // Fetch customer orders (relative endpoint)
+        const orders = await apiCall('/api/orders');
 
         if (orders.length === 0) {
             document.getElementById('orderTrackingContent').innerHTML = `
@@ -1056,7 +1056,7 @@ async function submitConsultation() {
             message: formData.get('consultMessage') || document.getElementById('consultMessage').value
         };
 
-      await apiCall(`${API_BASE_URL}/api/consultations`, {
+      await apiCall('/api/consultations', {
             method: 'POST',
             body: JSON.stringify(consultationData)
         });
@@ -1095,6 +1095,7 @@ window.removeFromCart = removeFromCart;
 window.updateQuantity = updateQuantity;
 window.checkout = checkout;
 window.submitConsultation = submitConsultation;
+window.viewOrderTracking = viewOrderTracking;
 window.filterProducts = filterProducts;
 window.performSearch = performSearch;
 window.performMobileSearch = performMobileSearch;
@@ -1139,7 +1140,7 @@ async function loadProductCatalog() {
 
     try {
         // Pass only the relative endpoint
-    const data = await apiCall(`${API_BASE_URL}/api/products`, {
+        const data = await apiCall('/api/products');
         currentProducts = data.products || [];
         filteredProducts = [...currentProducts];
         displayProducts();
@@ -1311,7 +1312,7 @@ async function filterProducts() {
     currentPage = 1;
 
     try {
-        const data = await apiCall(`${API_BASE_URL}/api/products?category=${categoryFilter}`);
+        const data = await apiCall(`/api/products?category=${categoryFilter}`);
         filteredProducts = data.products || [];
         displayProducts();
     } catch (error) {
@@ -1327,7 +1328,7 @@ async function searchProducts() {
     currentPage = 1;
 
     try {
-        const data = await apiCall(`${API_BASE_URL}/api/products?search=${encodeURIComponent(query)}`);
+        const data = await apiCall(`/api/products?search=${encodeURIComponent(query)}`);
         filteredProducts = data.products || [];
         displayProducts();
     } catch (error) {
