@@ -122,10 +122,11 @@ async function apiCall(endpoint, options = {}) {
         headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    ...options,
-    headers
-});
+    try {
+        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+            ...options,
+            headers
+        });
 
         const data = await response.json();
 
@@ -139,6 +140,7 @@ async function apiCall(endpoint, options = {}) {
         throw error;
     }
 }
+
 
 // Initialize event listeners
 function initEventListeners() {
