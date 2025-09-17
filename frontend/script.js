@@ -5,7 +5,7 @@ let cart = [];
 let currentCategory = 'all';
 
 // API base URL
-const API_BASE_URL = window.location.origin;
+const API_BASE_URL = "https://hello1-krcb.onrender.com";
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
