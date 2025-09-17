@@ -112,28 +112,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // API Helper function
 async function apiCall(endpoint, options = {}) {
-  const token = sessionStorage.getItem('authToken');
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers
-  };
+    const token = sessionStorage.getItem('authToken');
+    const headers = {
+        'Content-Type': 'application/json',
+        ...options.headers
+    };
 
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
 
- try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        ...options,
-        headers
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'API request failed');
-    return data;
-} catch (error) {
-    console.error('API Error:', error);
-    throw error;
-}
+    try {
+        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+            ...options,
+            headers
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'API request failed');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
 }
 
 
