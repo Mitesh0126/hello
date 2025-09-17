@@ -210,7 +210,8 @@ function toggleAuth() {
 
 async function loadPlants(category = 'all') {
     try {
-        const data = await apiCall(`${API_BASE_URL}/api/products?category=${category}`);
+        // Only relative path
+        const data = await apiCall(`/api/products?category=${category}`);
         return data.products || [];
     } catch (error) {
         console.error('Error loading plants:', error);
@@ -1135,7 +1136,8 @@ async function loadProductCatalog() {
     if (!productsGrid) return;
 
     try {
-        const data = await apiCall('${API_BASE_URL}/api/products');
+        // Pass only the relative endpoint
+        const data = await apiCall('/api/products');
         currentProducts = data.products || [];
         filteredProducts = [...currentProducts];
         displayProducts();
@@ -1150,6 +1152,7 @@ async function loadProductCatalog() {
         `;
     }
 }
+
 
 function displayProducts() {
     const productsGrid = document.getElementById('products-grid');
