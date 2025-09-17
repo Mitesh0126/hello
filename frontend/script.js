@@ -754,7 +754,7 @@ async function viewOrderTracking() {
     }
 
     try {
-        const orders = await apiCall('${API_BASE_URL}/api/orders');
+       const orders = await apiCall(`${API_BASE_URL}/api/orders`);
 
         if (orders.length === 0) {
             document.getElementById('orderTrackingContent').innerHTML = `
