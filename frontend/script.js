@@ -651,6 +651,7 @@ async function processPayment() {
 
             // Prepare order data with completed payment status
             const orderData = {
+                customerId: currentUser.id || currentUser._id,
                 customerName: currentUser.name,
                 customerEmail: currentUser.email,
                 items: cart.map(item => ({
@@ -665,27 +666,26 @@ async function processPayment() {
                 shipping: shipping,
                 total: total,
                 paymentMethod: selectedPaymentMethod.value.toUpperCase(),
-                paymentStatus: 'completed', // Mark payment as completed
+                paymentStatus: 'completed',
                 orderStatus: 'processing',
                 deliveryDetails: deliveryDetails,
                 basketReady: basketReady,
                 codCharge: codCharge
             };
 
-            // Submit order
-            const result = await fetch(`${API_BASE_URL}/api/orders`, {
+            // Submit order using API helper (adds base URL, headers, token)
+            const created = await apiCall('/api/orders', {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                },
                 body: JSON.stringify(orderData)
             });
+
+            const order = created?.order || created || {};
 
             // Show success
             document.getElementById('paymentProcessing').style.display = 'none';
             document.getElementById('paymentSuccess').style.display = 'block';
-            document.getElementById('successOrderId').textContent = result.order.orderId;
-            document.getElementById('successTransactionId').textContent = result.order.transactionId;
+            document.getElementById('successOrderId').textContent = order.orderId || order._id || '—';
+            document.getElementById('successTransactionId').textContent = order.transactionId || order.paymentId || '—';
 
             // Clear cart
             cart = [];
