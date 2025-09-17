@@ -1056,7 +1056,7 @@ async function submitConsultation() {
             message: formData.get('consultMessage') || document.getElementById('consultMessage').value
         };
 
-        await apiCall('${API_BASE_URL}/api/consultations', {
+      await apiCall(`${API_BASE_URL}/api/consultations`, {
             method: 'POST',
             body: JSON.stringify(consultationData)
         });
